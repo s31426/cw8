@@ -1,0 +1,21 @@
+namespace Tutorial8.Models.DTOs;
+
+using System;
+using System.Collections.Generic;
+
+
+
+public partial class ClientTrip
+{
+    public int IdClient { get; set; }
+
+    public int IdTrip { get; set; }
+
+    public DateTime RegisteredAt { get; set; }
+
+    public DateTime? PaymentDate { get; set; }
+
+    public virtual Client IdClientNavigation { get; set; } = null!;
+
+    public virtual Trip IdTripNavigation { get; set; } = null!;
+}

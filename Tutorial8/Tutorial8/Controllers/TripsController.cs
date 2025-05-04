@@ -33,7 +33,7 @@ namespace Tutorial8.Controllers
             return Ok();
         }
         
-        [HttpGet("test-connection")]
+        [HttpGet]
         public IActionResult TestConnection()
         {
             try
