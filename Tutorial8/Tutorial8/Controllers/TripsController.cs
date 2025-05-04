@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Tutorial8.Services;
 
 namespace Tutorial8.Controllers
@@ -15,7 +16,7 @@ namespace Tutorial8.Controllers
             _tripsService = tripsService;
         }
 
-        [HttpGet]
+        [HttpGet("get-trips")]
         public async Task<IActionResult> GetTrips()
         {
             var trips = await _tripsService.GetTrips();
@@ -30,6 +31,23 @@ namespace Tutorial8.Controllers
             // }
             // var trip = ... GetTrip(id);
             return Ok();
+        }
+        
+        [HttpGet("test-connection")]
+        public IActionResult TestConnection()
+        {
+            try
+            {
+                using (var connection = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=apbd;Integrated Security=True;"))
+                {
+                    connection.Open();
+                    return Ok("Connection successful!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Connection failed: {ex.Message}");
+            }
         }
     }
 }

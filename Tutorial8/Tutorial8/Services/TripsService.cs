@@ -5,14 +5,14 @@ namespace Tutorial8.Services;
 
 public class TripsService : ITripsService
 {
-    private readonly string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=APBD;Integrated Security=True;";
-    
+    public readonly string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=apbd;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+
     public async Task<List<TripDTO>> GetTrips()
     {
         var trips = new List<TripDTO>();
 
         string command = "SELECT IdTrip, Name FROM Trip";
-        
+
         using (SqlConnection conn = new SqlConnection(_connectionString))
         using (SqlCommand cmd = new SqlCommand(command, conn))
         {
@@ -31,7 +31,6 @@ public class TripsService : ITripsService
                 }
             }
         }
-        
 
         return trips;
     }
